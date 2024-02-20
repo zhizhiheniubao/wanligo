@@ -1,0 +1,47 @@
+server:
+  port: 10001
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/eml_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+#  security:
+#    user:
+#      name: root
+#      password: 123
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    database: 1
+    password: 123456
+    timeout: 6000
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启SQL输出
+    map-underscore-to-camel-case: false
+
+#设置显示日志级别
+logging:
+  level:
+    org.springframework: info
+
+#配置jwt参数
+token:
+  jwt:
+    #密钥
+    secret: byterain
+    #过期时间 秒
+    expire: 604800
+    #Java程序产生token，需要将token加入响应头response.setHeader("TOKEN",token)
+    header: TOKEN
+
+#阿里云OSS
+aliyun:
+  accessKeyId: LTAI5tBPRxACb8pJuD2t7UHU
+  secretAccessKey: TFFPgxsYKw5B9MEjhv7Vcz3XXRSgme
+  oss:
+    endPoint: oss-cn-hangzhou.aliyuncs.com
+    bucketName: wanligo07
