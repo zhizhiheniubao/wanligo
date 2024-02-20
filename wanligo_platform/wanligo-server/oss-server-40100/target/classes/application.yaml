@@ -1,0 +1,42 @@
+server:
+  port: 40100
+
+aliyun:
+  accessKeyId: LTAI5tBPRxACb8pJuD2t7UHU
+  secretAccessKey: TFFPgxsYKw5B9MEjhv7Vcz3XXRSgme
+  oss:
+    endPoint: oss-cn-hangzhou.aliyuncs.com
+    bucketName: wanligo07
+
+logging:
+  level:
+    org.springframework: info
+spring:
+  application:
+    name: oss-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/elm_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: Cjh1234567890
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    database: 1
+#    password: 123456
+#    timeout: 6000
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启SQL输出
+    map-underscore-to-camel-case: false
+  type-aliases-package: com.wanli.entity
+
+business-server:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

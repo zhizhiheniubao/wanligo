@@ -1,0 +1,22 @@
+server:
+  port: 11400
+logging:
+  level:
+    org.springframework: info
+spring:
+  application:
+    name: orders-server   #服务注册nacos注册中心（显示服务名）。
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/elm_db?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: 123456
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   #开启SQL输出
+  type-aliases-package: com.wanli.entity

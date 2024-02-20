@@ -1,0 +1,44 @@
+server:
+  port: 6868
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      routes:
+      - id: category-server
+        uri: lb://category-server
+        predicates:
+        - Path=/category/**
+      - id: business-server
+        uri: lb://business-server
+        predicates:
+        - Path=/business/**
+      - id: account-server
+        uri: lb://account-server
+        predicates:
+        - Path=/account/**
+      - id: cart-server
+        uri: lb://cart-server
+        predicates:
+        - Path=/cart/**
+      - id: food-server
+        uri: lb://food-server
+        predicates:
+        - Path=/food/**
+      - id: deliveryaddress-server
+        uri: lb://deliveryaddress-server
+        predicates:
+        - Path=/deliveryaddress/**
+      - id: orders-server
+        uri: lb://orders-server
+        predicates:
+        - Path=/orders/**
+      - id: oss-server
+        uri: lb://oss-server
+        predicates:
+        - Path=/oss/**
+      - id: comment-server
+        uri: lb://comment-server
+        predicates:
+        - Path=/comment/**
