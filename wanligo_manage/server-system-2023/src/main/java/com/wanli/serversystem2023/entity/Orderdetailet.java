@@ -8,6 +8,9 @@ import com.wanli.serversystem2023.common.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>
  * 
@@ -48,4 +51,5 @@ public class Orderdetailet {
 
     @TableField("del_tag")
     private Integer delTag;
+
 }

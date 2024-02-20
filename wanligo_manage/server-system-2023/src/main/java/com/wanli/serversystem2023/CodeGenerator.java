@@ -54,7 +54,7 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/eml_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/elm_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
@@ -129,7 +129,7 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel); // 表名转换方式: 数据库中的下划线转成java驼峰  sys_menu表-->sysMenu
         strategy.setColumnNaming(NamingStrategy.underline_to_camel); // 列名转换方式
-        strategy.setSuperEntityClass("com.wanli.serversystem2023.common.BaseEntity");
+//        strategy.setSuperEntityClass("com.wanli.serversystem2023.common.BaseEntity");
         strategy.setEntityLombokModel(true);  //lombok模型
         strategy.setRestControllerStyle(true);  //resutFul风格控制器
         // 公共父类--所有项目 控制器的父类

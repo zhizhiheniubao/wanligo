@@ -31,7 +31,7 @@ public class UserLogoutSuccessHandler implements LogoutSuccessHandler {
         response.setContentType("application/json;charset=utf-8");
         ServletOutputStream out = response.getOutputStream();
         response.setHeader(jwtUtil.getHeader(),"");
-        Result result = Result.success("登出操作成功");
+        Result result = Result.success("登出成功");
         out.write(JSONUtil.toJsonStr(result).getBytes("utf-8"));
 
         out.flush();

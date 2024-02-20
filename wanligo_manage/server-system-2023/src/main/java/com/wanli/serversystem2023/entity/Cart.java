@@ -38,13 +38,13 @@ public class Cart{
      * 所属商家编号
      */
     @TableField("business_id")
-    private Integer businessId;
+    private Long businessId;
 
     /**
      * 所属用户编号
      */
     @TableField("account_id")
-    private String userId;
+    private String accountId;
 
     /**
      * 同一类型食品的购买数量

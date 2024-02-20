@@ -23,19 +23,19 @@ public class Account{
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "account_id", type = IdType.AUTO)
-    private String userId;
+    private String accountId;
 
     @TableField("password")
     private String password;
 
     @TableField("account_name")
-    private String userName;
+    private String accountName;
 
     @TableField("account_sex")
-    private Integer userSex;
+    private Integer accountSex;
 
     @TableField("account_img")
-    private String userImg;
+    private String accountImg;
 
     @TableField("statu")
     private Integer statu;

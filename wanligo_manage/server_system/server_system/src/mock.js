@@ -1,6 +1,6 @@
 //模拟服务器端响应数据
 //引入mock.js
-const Mock = require('mockjs')
+const Mock = require('mock.js')
 
 //产生随机码Random对象
 const Random = Mock.Random

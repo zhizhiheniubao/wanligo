@@ -1,6 +1,9 @@
 package com.wanli.serversystem2023.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -33,13 +36,13 @@ public class Orders{
      * 用户编号
      */
     @TableField("account_id")
-    private String userId;
+    private String accountId;
 
     /**
      * 商家编号
      */
     @TableField("business_id")
-    private Integer businessId;
+    private Long businessId;
 
     /**
      * 订购日期
@@ -67,4 +70,7 @@ public class Orders{
 
     @TableField("del_tag")
     private Integer delTag;
+
+//    @TableField(exist = false)
+//    private List<Orderdetailet> children = new ArrayList<>();
 }

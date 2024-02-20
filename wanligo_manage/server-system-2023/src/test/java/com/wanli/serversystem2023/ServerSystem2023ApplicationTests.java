@@ -13,8 +13,8 @@ import java.util.List;
 
 @SpringBootTest
 class ServerSystem2023ApplicationTests {
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 //    @Autowired
 //    private UserService userService;
@@ -25,22 +25,22 @@ class ServerSystem2023ApplicationTests {
 //        System.out.println(userAuthorityInfo);
 //    }
 //
-    @Test
-    void testPassword(){
-        String pwd = "123";
-        String encode = bCryptPasswordEncoder.encode(pwd);
-        System.out.println("加密后:"+encode);
-        String abc123 = "123";
-        boolean matches = bCryptPasswordEncoder.matches(abc123, encode);
-        System.out.println(matches);
-    }
+//    @Test
+//    void testPassword(){
+//        String pwd = "123";
+//        String encode = bCryptPasswordEncoder.encode(pwd);
+//        System.out.println("加密后:"+encode);
+//        String abc123 = "123";
+//        boolean matches = bCryptPasswordEncoder.matches(abc123, encode);
+//        System.out.println(matches);
+//    }
 
 
 //    @Autowired
 //    private SysUserMapper sysUserMapper;
 //    @Autowired
 //    private SysMenuMapper sysMenuMapper;
-//
+
 //    @Test
 //    void contextLoads() {
 //        List<SysUser> sysUsers = sysUserMapper.selectList(null);

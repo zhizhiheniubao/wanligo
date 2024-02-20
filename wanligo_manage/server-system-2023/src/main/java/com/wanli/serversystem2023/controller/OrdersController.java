@@ -2,18 +2,15 @@ package com.wanli.serversystem2023.controller;
 
 
 
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.db.sql.Order;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.gson.internal.$Gson$Types;
 import com.wanli.serversystem2023.common.Result;
-import com.wanli.serversystem2023.entity.Account;
-import com.wanli.serversystem2023.entity.Orderdetailet;
-import com.wanli.serversystem2023.entity.Orders;
-import com.wanli.serversystem2023.service.AccountService;
-import com.wanli.serversystem2023.service.OrderdetailetService;
-import com.wanli.serversystem2023.service.OrdersService;
+import com.wanli.serversystem2023.entity.*;
+import com.wanli.serversystem2023.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +19,7 @@ import com.wanli.serversystem2023.common.BaseController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -40,6 +38,19 @@ public class OrdersController extends BaseController {
     OrderdetailetService orderdetailetService;
     @Autowired
     AccountService accountService;
+    @Autowired
+    BusinessService businessService;
+    @Autowired
+    DeliveryaddressService deliveryaddressService;
+    @Autowired
+    FoodService foodService;
+
+    @GetMapping("/ordersGroupBy")
+    public Result ordersGroupBy(){
+        List<Map<String, Object>> groupBys = new ArrayList<Map<String, Object>>();
+        groupBys = ordersService.listMaps(new QueryWrapper<Orders>().select("count(*) as count,business_id as businessId").groupBy("business_id"));
+        return Result.success(groupBys);
+    }
 
     @GetMapping("/select")
     public Result select(String accountId,Integer orderState,String endTime,String startTime){
@@ -64,47 +75,54 @@ public class OrdersController extends BaseController {
     }
 
     @GetMapping("/page")
-    public Result page(String data,Integer orderState,String endTime,String startTime,Integer deTag) throws Exception {
-        QueryWrapper<Orders> wrapper = new QueryWrapper<>();
+    public Result page(String data,Integer orderState,String endTime,String startTime,Long delTag){
+        System.out.println("data"+data);
+        QueryWrapper<Orders> ordersWrapper = new QueryWrapper<>();
         if(data != null && data.length() > 0){
             List<Account> accounts = accountService.list(new QueryWrapper<Account>().like(StrUtil.isNotBlank(data), "account_name", data));
-            List<Integer> accountIds = new ArrayList<Integer>();
-            accounts.forEach(account -> {
-                categoryIds.add(account.getUserId());
-            });
-            wrapper.and(i -> i.like()
+            List<String> accountIds = new ArrayList<String>();
+            if (accounts.size() > 0){
+                accounts.forEach(account -> { accountIds.add(account.getAccountId()); });
+            }else{
+                accountIds.add("0");
+            }
+
+            List<Deliveryaddress> deliveryaddresses = deliveryaddressService.list(new QueryWrapper<Deliveryaddress>().like(StrUtil.isNotBlank(data), "address", data));
+            List<Integer> deliveryaddressIds = new ArrayList<>();
+            if (deliveryaddresses.size() > 0){
+                deliveryaddresses.forEach(deliveryaddress -> { deliveryaddressIds.add(deliveryaddress.getDaId()); });
+            } else {
+                deliveryaddressIds.add(0);
+            }
+
+            List<Business> businesses = businessService.list(new QueryWrapper<Business>().like(StrUtil.isNotBlank(data), "business_name", data));
+            List<Long> businessIds = new ArrayList<>();
+            if (businesses.size() > 0){
+                businesses.forEach(business -> { businessIds.add(business.getBusinessId()); });
+            } else {
+                businessIds.add(0L);
+            }
+
+            ordersWrapper.and(i -> i.in("account_id",accountIds)
+                                    .or()
+                                    .in("business_id",businessIds)
+                                    .or()
+                                    .in("da_id",deliveryaddressIds)
             );
         }
         if (orderState != null){
-            wrapper.eq("order_state",orderState);
+            ordersWrapper.eq("order_state",orderState);
         }
-        if (endTime != null){
-            wrapper.and(i -> i.ge("order_date",startTime)
+        if (endTime != null && endTime.length() > 0){
+            ordersWrapper.and(i -> i.ge("order_date",startTime)
                                   .le("order_date",endTime)
             );
         }
-        if (deTag != null){
-            wrapper.eq("de_tag",deTag);
+        if (delTag != null){
+            ordersWrapper.eq("del_tag",delTag);
         }
 
-        Page<Orders> orders = ordersService.page(getPage(), wrapper);
+        Page<Orders> orders = ordersService.page(getPage(),ordersWrapper);
         return Result.success(orders);
     }
 }
-//        Page<Orders> orders;
-//        SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd");
-//        QueryWrapper<Orders> wrapper = new QueryWrapper<>();
-//        if(accountId.length() != 0 || orderState != null || startTime.length() != 0){
-//            if(accountId.length() != 0 && orderState != null && startTime.length() != 0){
-//                wrapper.and(i -> i.eq("order_state",orderState)
-//                                  .like(StrUtil.isNotBlank(accountId),"account_id",accountId)
-//                                  .ge("order_date",startTime)
-//                                  .le("order_date",endTime)
-//                );
-//            }else {
-//                return Result.fail("查询数据未输入完整");
-//            }
-//            orders = ordersService.page(getPage(),wrapper);
-//        }else {
-//            orders = ordersService.page(getPage());
-//        return Result.success(orders);

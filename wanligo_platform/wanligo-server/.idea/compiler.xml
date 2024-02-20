@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="gateway-server-6868" />
+        <module name="account-server-9000" />
+        <module name="foot-server-30100" />
+        <module name="oss-server-40100" />
+        <module name="deliveryaddress-server-33100" />
+        <module name="orders-server-11400" />
+        <module name="business-server-20100" />
+        <module name="comment-server-50100" />
+        <module name="category-server-10100" />
+        <module name="cart-server-30300" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="account-server-9000" options="-parameters" />
+      <module name="business-server-20100" options="-parameters" />
+      <module name="cart-server-30300" options="-parameters" />
+      <module name="category-server-10100" options="-parameters" />
+      <module name="comment-server-50100" options="-parameters" />
+      <module name="deliveryaddress-server-33100" options="-parameters" />
+      <module name="foot-server-30100" options="-parameters" />
+      <module name="gateway-server-6868" options="-parameters" />
+      <module name="orders-server-11400" options="-parameters" />
+      <module name="oss-server-40100" options="-parameters" />
+    </option>
+  </component>
+</project>

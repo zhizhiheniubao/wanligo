@@ -63,14 +63,16 @@ public class BusinessController extends BaseController {
 
     @GetMapping("/page")
     public Result page(String data,Long categoryId,Long delTag){
-        System.out.println("data"+data);
+        System.out.println(data);
         QueryWrapper<Business> businessWrapper = new QueryWrapper<>();
         if(data != null && data.length() > 0){
             List<Category> categorys = categoryService.list(new QueryWrapper<Category>().like(StrUtil.isNotBlank(data), "category_name", data));
             List<Integer> categoryIds = new ArrayList<Integer>();
-                        categorys.forEach(category -> {
-                categoryIds.add(category.getCategoryId());
-            });
+            if (categorys.size() > 0){
+                categorys.forEach(category -> { categoryIds.add(category.getCategoryId()); });
+            }else {
+                categoryIds.add(0);
+            }
             businessWrapper.and(i -> i.like(StrUtil.isNotBlank(data),"business_name",data)
                                         .or()
                                         .like(StrUtil.isNotBlank(data),"business_address",data)

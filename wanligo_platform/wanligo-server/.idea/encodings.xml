@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/account-server-9000/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business-server-20100/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cart-server-30300/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/category-server-10100/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/comment-server-50100/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/deliveryaddress-server-33100/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/food-server-30100/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway-server-6868/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/orders-server-11400/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oss-server-40100/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

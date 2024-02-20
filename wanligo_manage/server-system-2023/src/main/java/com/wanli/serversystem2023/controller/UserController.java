@@ -15,12 +15,14 @@ import com.wanli.serversystem2023.service.UserRoleService;
 import com.wanli.serversystem2023.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import com.wanli.serversystem2023.common.BaseController;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +47,21 @@ public class UserController extends BaseController {
     PasswordEncoder passwordEncoder;
     @Autowired
     UserRoleService userRoleService;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    //更新用户密码
+    @GetMapping("/updatePassword")
+    public Result updatePassword(Long id,String password,String currentPass){
+        User user = userService.getById(id);
+        if (bCryptPasswordEncoder.matches(currentPass,user.getPassword())){
+            user.setPassword(passwordEncoder.encode(password));
+            user.setUpdated(LocalDateTime.now());
+            userService.updateById(user);
+            return Result.success("密码更新成功  请重新登录");
+        }
+        return Result.fail("原密码输入错误");
+    }
 
     //保存用户分配角色
     @Transactional

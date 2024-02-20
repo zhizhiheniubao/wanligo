@@ -8,6 +8,8 @@ import com.wanli.serversystem2023.common.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 /**
  * <p>
  * 
@@ -56,8 +58,8 @@ public class Deliveryaddress{
      * 所属用户编号
      */
     @TableField("account_id")
-    private String userId;
+    private String accountId;
 
-    @TableField("del_tag")
-    private Integer delTag;
+    @TableField(exist = false)
+    private List<Account> accounts;
 }

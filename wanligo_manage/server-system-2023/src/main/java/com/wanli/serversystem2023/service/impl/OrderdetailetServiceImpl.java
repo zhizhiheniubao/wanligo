@@ -6,8 +6,10 @@ import com.wanli.serversystem2023.mapper.OrderdetailetMapper;
 import com.wanli.serversystem2023.service.OrderdetailetService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>
@@ -21,9 +23,8 @@ import java.util.Arrays;
 public class OrderdetailetServiceImpl extends ServiceImpl<OrderdetailetMapper, Orderdetailet> implements OrderdetailetService {
 
     @Override
-    public void deleteOrderdetailetByBusinessId(Long[] businessIds) {
-        Arrays.stream(businessIds).forEach(businessId -> {
-            this.remove(new QueryWrapper<Orderdetailet>().inSql("food_id","select food_id from sys_food where business_id = "+ businessId));
-        });
+    public List<Orderdetailet> orderdetailetListByorderId(Integer orderId) {
+        List<Orderdetailet> orderdetailetList = this.list(new QueryWrapper<Orderdetailet>().and(i->i.eq("order_id",orderId).eq("del_tag",1)));
+        return orderdetailetList;
     }
 }

@@ -65,6 +65,9 @@ public class Business{
     @TableField("star_price")
     private BigDecimal starPrice;
 
+    @TableField("grade")
+    private BigDecimal grade;
+
     /**
      * 配送费
      */

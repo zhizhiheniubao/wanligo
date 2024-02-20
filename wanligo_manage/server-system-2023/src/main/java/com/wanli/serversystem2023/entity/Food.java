@@ -1,6 +1,9 @@
 package com.wanli.serversystem2023.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -67,4 +70,5 @@ public class Food {
 
     @TableField("del_tag")
     private Integer delTag;
+
 }
